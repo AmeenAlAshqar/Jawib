@@ -1,7 +1,7 @@
 {
-  "name": "سين سؤال جيم جواب الإسلامي",
-  "short_name": "جواب",
-  "description": "لعبة الأسئلة الإسلامية بأسلوب سين جيم",
+  "name": "جاوب — التحدي الإسلامي",
+  "short_name": "جاوب",
+  "description": "جاوب - لعبة التحدي الإسلامي",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -13,16 +13,16 @@
   "categories": ["games", "education"],
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "logo.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "icon-512.png",
+      "src": "logo.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
