@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>سين سؤال جيم جواب الإسلامي</title>
+<title>جاوب — التحدي الإسلامي</title>
 <meta name="theme-color" content="#C9922A">
-<meta name="description" content="لعبة الأسئلة الإسلامية - سين سؤال جيم جواب">
+<meta name="description" content="جاوب - لعبة التحدي الإسلامي">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="جواب">
+<meta name="apple-mobile-web-app-title" content="جاوب">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -27,20 +27,23 @@ body{font-family:'Cairo',sans-serif;direction:rtl;background:#FFF5E5;color:#4A2A
 .inp:focus{border-color:#C9922A}
 .lbl{display:block;color:#8B5A1A;font-weight:700;font-size:.72rem;margin-bottom:.25rem}
 .catcard{border-radius:13px;cursor:pointer;border:2px solid transparent;position:relative;background:white;box-shadow:0 2px 10px rgba(180,130,50,.1);overflow:hidden;transition:all .18s}
-.catcard:hover{transform:translateY(-2px)}.catcard.sel{border-color:#C05A20}
-.catcard .nb{position:absolute;top:-1px;right:-1px;width:22px;height:22px;background:#C05A20;border-radius:0 10px 0 12px;display:flex;align-items:center;justify-content:center;font-size:.68rem;color:white;font-weight:900;z-index:2}
+.catcard:hover{transform:translateY(-2px)}.catcard.sel{border-color:#C05A20;box-shadow:0 4px 14px rgba(192,90,32,.25)}
+.catcard .nb{position:absolute;top:-1px;right:-1px;width:24px;height:24px;background:#C05A20;border-radius:0 11px 0 13px;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:white;font-weight:900;z-index:2}
+.cat-img{width:100%;height:88px;display:flex;align-items:center;justify-content:center;padding:6px}
+.cat-img img{max-width:100%;max-height:100%;object-fit:contain}
 .jsel{width:100%;padding:.3rem;border:1.5px solid #D4B870;border-radius:5px;font-family:'Cairo',sans-serif;font-size:.6rem;background:#FFFAEE;color:#4A2A0A;cursor:pointer;outline:none}
 .gtag{display:inline-block;background:#FFE8C9;color:#8B5A1A;font-size:.55rem;font-weight:700;padding:.12rem .42rem;border-radius:8px;margin-top:.25rem}
 .bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;padding:.55rem}
 .bcard{border-radius:11px;overflow:hidden;display:flex;flex-direction:column;background:white;border:1.5px solid #E8D9B5}
 .bcard-hd{background:linear-gradient(135deg,#C9922A,#D4A843);padding:.36rem .2rem;text-align:center;color:#FFF8E8;font-size:.64rem;font-weight:700}
-.bcard-body{flex:1;display:grid;grid-template-columns:1fr 70px 1fr;min-height:175px}
+.bcard-body{flex:1;display:grid;grid-template-columns:1fr 80px 1fr;min-height:175px}
 .bside{display:flex;flex-direction:column;gap:4px;padding:4px}
 .pb{flex:1;width:100%;border:none;border-radius:9px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:900;font-size:1.7rem;background:#FFF1D6;display:flex;align-items:center;justify-content:center;color:#4A2A0A;box-shadow:0 1px 3px rgba(180,130,50,.12);transition:all .15s}
 .pb:hover:not(.ud){background:#FFE0A8;transform:scale(1.04)}
 .pb.ud{background:#F0EAE0;color:#C0B5A0!important;cursor:default;font-size:1rem;box-shadow:none}
 .p2{color:#5A8E3D}.p4{color:#C05A20}.p6{color:#9B2D2D}
-.cimgw{display:flex;align-items:center;justify-content:center;opacity:.85}
+.cimgw{display:flex;align-items:center;justify-content:center;padding:4px;opacity:.92}
+.cimgw img{max-width:100%;max-height:100%;object-fit:contain}
 .sb-team{text-align:center;border-radius:9px;padding:.4rem .85rem;border:2px solid transparent}
 .sb-team.active{background:#FFF1D6;border-color:#C9922A}
 .score-row{display:inline-flex;align-items:center;gap:.18rem}
@@ -50,6 +53,7 @@ body{font-family:'Cairo',sans-serif;direction:rtl;background:#FFF5E5;color:#4A2A
 .snum:hover{background:#FFF1D6}
 .arow{background:white;border:1.5px solid #E8D9B5;border-radius:11px;padding:.7rem .9rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .arow:hover{background:#FFFAEE;border-color:#C9922A}
+.arow img.aico{width:38px;height:38px;object-fit:contain}
 .aqrow{background:white;border:1px solid #E8D9B5;border-radius:9px;padding:.6rem .75rem;margin-bottom:.32rem;display:flex;gap:.4rem;align-items:flex-start}
 .ppts{flex-shrink:0;color:white;font-weight:900;font-size:.62rem;padding:.16rem .42rem;border-radius:7px;line-height:1.4;margin-top:.1rem}
 .aqtxt{flex:1;color:#4A2A0A;font-size:.78rem;line-height:1.5;font-family:'Amiri',serif}
@@ -68,19 +72,11 @@ input[name="ept"][value="600"]:checked+.popt{border-color:#9B2D2D;color:#9B2D2D;
 <body>
 <div id="gr">
 <div id="s-home" class="scr on" style="background:linear-gradient(160deg,#FFF5E5,#FFE8D0);overflow-y:auto">
-<div style="display:flex;justify-content:flex-end;padding:.6rem 1rem 0">
+<div style="display:flex;justify-content:flex-end;padding:.55rem 1rem 0">
 <button onclick="show('s-admin')" style="background:rgba(201,146,42,.15);border:1.5px solid #C9922A;color:#8B5A1A;border-radius:18px;padding:.3rem .8rem;font-family:'Cairo',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer">⚙ إدارة الأسئلة</button>
 </div>
-<div style="text-align:center;padding:.5rem 1rem .7rem">
-<svg viewBox="0 0 260 118" width="220" style="max-width:88%">
-<defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A0741A"/><stop offset="50%" stop-color="#C9922A"/><stop offset="100%" stop-color="#A0741A"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E5C97D"/><stop offset="100%" stop-color="#C9A84C"/></linearGradient></defs>
-<polygon points="130,4 252,66 252,116 8,116 8,66" fill="url(#g2)" opacity=".45"/>
-<polygon points="130,11 244,70 244,110 16,110 16,70" fill="none" stroke="#A0741A" stroke-width="1.5" opacity=".45"/>
-<circle cx="130" cy="28" r="11" fill="#C9922A"/><circle cx="134" cy="25" r="9" fill="#FFF5E5"/>
-<text x="130" y="70" text-anchor="middle" font-family="Amiri,serif" font-size="30" font-weight="700" fill="url(#g1)">سين سؤال</text>
-<text x="130" y="100" text-anchor="middle" font-family="Amiri,serif" font-size="30" font-weight="700" fill="url(#g1)">جيم جواب</text>
-</svg>
-<div style="display:inline-block;background:linear-gradient(135deg,#C05A20,#E07B39);color:white;padding:.26rem 1.4rem;border-radius:18px;font-size:.82rem;font-weight:700">الإسلامي</div>
+<div style="text-align:center;padding:.4rem 1rem .8rem">
+<img src="logo.png" alt="جاوب — التحدي الإسلامي" style="width:92%;max-width:520px;height:auto">
 </div>
 <div style="padding:0 .9rem .8rem">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
@@ -161,7 +157,7 @@ input[name="ept"][value="600"]:checked+.popt{border-color:#9B2D2D;color:#9B2D2D;
 </div>
 <div id="s-board" class="scr">
 <div class="tb">
-<span class="tb-t" id="btitle">سين سؤال جيم جواب</span>
+<span class="tb-t" id="btitle">جاوب</span>
 <span id="tbadge" class="pu" style="background:rgba(255,255,255,.22);padding:.18rem .68rem;border-radius:18px;font-size:.7rem;font-weight:700;color:#FFF8E8;flex-shrink:0"></span>
 <button class="gb" onclick="show('s-home')">خروج</button>
 </div>
