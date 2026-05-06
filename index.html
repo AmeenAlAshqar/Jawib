@@ -2,11 +2,12 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>جاوب — التحدي الإسلامي</title>
 <meta name="theme-color" content="#C9922A">
 <meta name="description" content="جاوب - لعبة التحدي الإسلامي">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="جاوب">
 <link rel="manifest" href="manifest.json">
@@ -14,15 +15,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow:hidden}
-body{font-family:'Cairo',sans-serif;direction:rtl;background:#FFF5E5;color:#4A2A0A}
-#gr{height:100vh;width:100%;overflow:hidden;background:#FFF5E5;display:flex;flex-direction:column}
-.scr{display:none;flex-direction:column;flex:1;overflow:hidden}.scr.on{display:flex}
-.tb{background:linear-gradient(135deg,#C9922A,#D4A843);padding:.55rem .9rem;display:flex;justify-content:space-between;align-items:center;gap:.4rem;flex-shrink:0}
-.tb-t{font-family:'Amiri',serif;font-size:1rem;color:#FFF8E8;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html,body{margin:0;padding:0;width:100%;height:100vh;height:100dvh;overflow:hidden;position:fixed;background:#FFF5E5;-webkit-overflow-scrolling:touch}
+body{font-family:'Cairo',sans-serif;direction:rtl;color:#4A2A0A}
+#gr{width:100%;height:100%;background:#FFF5E5;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+.scr{display:none;flex-direction:column;flex:1;overflow:hidden;min-height:0}
+.scr.on{display:flex}
+.tb{background:linear-gradient(135deg,#C9922A,#D4A843);padding:.5rem .9rem;display:flex;justify-content:space-between;align-items:center;gap:.4rem;flex-shrink:0}
+.tb-t{font-family:'Amiri',serif;font-size:.95rem;color:#FFF8E8;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ob{background:#C05A20;color:white;border:none;border-radius:50px;padding:.7rem 1.7rem;font-size:.92rem;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer}
 .ob:hover{background:#E07B39}.ob:disabled{background:#C9B998;cursor:not-allowed}
-.gb{background:rgba(255,255,255,.22);border:none;color:#FFF8E8;border-radius:7px;padding:.22rem .6rem;cursor:pointer;font-family:'Cairo',sans-serif;font-size:.72rem;font-weight:700}
+.gb{background:rgba(255,255,255,.22);border:none;color:#FFF8E8;border-radius:7px;padding:.22rem .6rem;cursor:pointer;font-family:'Cairo',sans-serif;font-size:.72rem;font-weight:700;flex-shrink:0}
 .inp{width:100%;background:white;border:1.5px solid #D4B870;border-radius:9px;padding:.55rem .85rem;color:#4A2A0A;font-family:'Cairo',sans-serif;font-size:.85rem;outline:none}
 .inp:focus{border-color:#C9922A}
 .lbl{display:block;color:#8B5A1A;font-weight:700;font-size:.72rem;margin-bottom:.25rem}
@@ -33,23 +35,23 @@ body{font-family:'Cairo',sans-serif;direction:rtl;background:#FFF5E5;color:#4A2A
 .cat-img img{max-width:100%;max-height:100%;object-fit:contain}
 .jsel{width:100%;padding:.3rem;border:1.5px solid #D4B870;border-radius:5px;font-family:'Cairo',sans-serif;font-size:.6rem;background:#FFFAEE;color:#4A2A0A;cursor:pointer;outline:none}
 .gtag{display:inline-block;background:#FFE8C9;color:#8B5A1A;font-size:.55rem;font-weight:700;padding:.12rem .42rem;border-radius:8px;margin-top:.25rem}
-.bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;padding:.55rem}
-.bcard{border-radius:11px;overflow:hidden;display:flex;flex-direction:column;background:white;border:1.5px solid #E8D9B5}
-.bcard-hd{background:linear-gradient(135deg,#C9922A,#D4A843);padding:.36rem .2rem;text-align:center;color:#FFF8E8;font-size:.64rem;font-weight:700}
-.bcard-body{flex:1;display:grid;grid-template-columns:1fr 80px 1fr;min-height:175px}
-.bside{display:flex;flex-direction:column;gap:4px;padding:4px}
-.pb{flex:1;width:100%;border:none;border-radius:9px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:900;font-size:1.7rem;background:#FFF1D6;display:flex;align-items:center;justify-content:center;color:#4A2A0A;box-shadow:0 1px 3px rgba(180,130,50,.12);transition:all .15s}
+.bgrid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:.4rem;padding:.4rem;width:100%;height:100%;min-height:0;flex:1}
+.bcard{border-radius:11px;overflow:hidden;display:flex;flex-direction:column;background:white;border:1.5px solid #E8D9B5;min-height:0}
+.bcard-hd{background:linear-gradient(135deg,#C9922A,#D4A843);padding:.3rem .2rem;text-align:center;color:#FFF8E8;font-size:clamp(.55rem,1.6vh,.68rem);font-weight:700;flex-shrink:0;line-height:1.2}
+.bcard-body{flex:1;display:grid;grid-template-columns:1fr 60px 1fr;min-height:0}
+.bside{display:flex;flex-direction:column;gap:3px;padding:3px;min-height:0}
+.pb{flex:1;width:100%;border:none;border-radius:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:900;font-size:clamp(1rem,4vh,1.7rem);background:#FFF1D6;display:flex;align-items:center;justify-content:center;color:#4A2A0A;box-shadow:0 1px 3px rgba(180,130,50,.12);transition:all .15s;min-height:0;padding:0}
 .pb:hover:not(.ud){background:#FFE0A8;transform:scale(1.04)}
-.pb.ud{background:#F0EAE0;color:#C0B5A0!important;cursor:default;font-size:1rem;box-shadow:none}
+.pb.ud{background:#F0EAE0;color:#C0B5A0!important;cursor:default;font-size:clamp(.7rem,2.5vh,1rem);box-shadow:none}
 .p2{color:#5A8E3D}.p4{color:#C05A20}.p6{color:#9B2D2D}
-.cimgw{display:flex;align-items:center;justify-content:center;padding:4px;opacity:.92}
+.cimgw{display:flex;align-items:center;justify-content:center;padding:4px;opacity:.92;min-height:0;overflow:hidden}
 .cimgw img{max-width:100%;max-height:100%;object-fit:contain}
-.sb-team{text-align:center;border-radius:9px;padding:.4rem .85rem;border:2px solid transparent}
+.sb-team{text-align:center;border-radius:9px;padding:.35rem .85rem;border:2px solid transparent}
 .sb-team.active{background:#FFF1D6;border-color:#C9922A}
 .score-row{display:inline-flex;align-items:center;gap:.18rem}
 .sbtn{width:22px;height:22px;border-radius:50%;border:1.5px solid #D4B870;background:white;cursor:pointer;font-weight:900;font-size:.78rem;color:#8B5A1A;display:flex;align-items:center;justify-content:center;line-height:1}
 .sbtn:hover{background:#FFE8C9}
-.snum{cursor:pointer;padding:.1rem .35rem;border-radius:5px;font-size:1.5rem;font-weight:900;line-height:1;min-width:54px;display:inline-block;text-align:center}
+.snum{cursor:pointer;padding:.08rem .3rem;border-radius:5px;font-size:1.4rem;font-weight:900;line-height:1;min-width:50px;display:inline-block;text-align:center}
 .snum:hover{background:#FFF1D6}
 .arow{background:white;border:1.5px solid #E8D9B5;border-radius:11px;padding:.7rem .9rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .arow:hover{background:#FFFAEE;border-color:#C9922A}
@@ -67,15 +69,27 @@ input[name="ept"][value="600"]:checked+.popt{border-color:#9B2D2D;color:#9B2D2D;
 @keyframes bounceIn{0%{transform:scale(.4);opacity:0}65%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
 .bi{animation:bounceIn .5s ease}.pu{animation:pulse 2s infinite}
+@media (orientation:landscape) and (max-height:500px){
+.tb{padding:.3rem .7rem}.tb-t{font-size:.85rem}
+.bcard-body{grid-template-columns:1fr 48px 1fr}
+.bcard-hd{padding:.2rem .15rem;font-size:.58rem}
+.bside{gap:2px;padding:2px}
+.pb{font-size:clamp(.85rem,5vh,1.3rem);border-radius:6px}
+.cimgw{padding:2px}
+#sbar{padding:.25rem .5rem!important}
+.sb-team{padding:.2rem .55rem}
+.snum{font-size:1.1rem;min-width:40px}
+.sbtn{width:18px;height:18px;font-size:.7rem}
+}
 </style>
 </head>
 <body>
 <div id="gr">
 <div id="s-home" class="scr on" style="background:linear-gradient(160deg,#FFF5E5,#FFE8D0);overflow-y:auto">
-<div style="display:flex;justify-content:flex-end;padding:.55rem 1rem 0">
+<div style="display:flex;justify-content:flex-end;padding:.55rem 1rem 0;flex-shrink:0">
 <button onclick="show('s-admin')" style="background:rgba(201,146,42,.15);border:1.5px solid #C9922A;color:#8B5A1A;border-radius:18px;padding:.3rem .8rem;font-family:'Cairo',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer">⚙ إدارة الأسئلة</button>
 </div>
-<div style="text-align:center;padding:.4rem 1rem .8rem">
+<div style="text-align:center;padding:.4rem 1rem .8rem;flex-shrink:0">
 <img src="logo.png" alt="جاوب — التحدي الإسلامي" style="width:92%;max-width:520px;height:auto">
 </div>
 <div style="padding:0 .9rem .8rem">
@@ -92,7 +106,7 @@ input[name="ept"][value="600"]:checked+.popt{border-color:#9B2D2D;color:#9B2D2D;
 <div class="tb"><button class="gb" onclick="show('s-home')">← الرئيسية</button><span class="tb-t">⚙ إدارة بنك الأسئلة</span><span style="width:55px"></span></div>
 <div style="padding:.9rem">
 <div id="adm-stats" style="background:white;border:1.5px solid #D4B870;border-radius:11px;padding:.65rem;text-align:center;margin-bottom:.75rem;color:#8B5A1A;font-size:.8rem;font-weight:700"></div>
-<div style="background:#FFF8E8;border:1px solid #D4B870;border-radius:9px;padding:.5rem .72rem;margin-bottom:.75rem;color:#8B5A1A;font-size:.66rem;text-align:center">📝 التعديلات تحفظ على هذا الجهاز فقط — للنشر العام يلزم قاعدة بيانات</div>
+<div style="background:#FFF8E8;border:1px solid #D4B870;border-radius:9px;padding:.5rem .72rem;margin-bottom:.75rem;color:#8B5A1A;font-size:.66rem;text-align:center">📝 التعديلات تحفظ على هذا الجهاز فقط</div>
 <div id="adm-cats"></div>
 </div>
 </div>
@@ -161,8 +175,8 @@ input[name="ept"][value="600"]:checked+.popt{border-color:#9B2D2D;color:#9B2D2D;
 <span id="tbadge" class="pu" style="background:rgba(255,255,255,.22);padding:.18rem .68rem;border-radius:18px;font-size:.7rem;font-weight:700;color:#FFF8E8;flex-shrink:0"></span>
 <button class="gb" onclick="show('s-home')">خروج</button>
 </div>
-<div style="flex:1;background:#FFF5E5;overflow:auto"><div class="bgrid" id="bgrid"></div></div>
-<div id="sbar" style="display:flex;justify-content:space-around;background:white;border-top:2px solid #E8D9B5;padding:.5rem .75rem;flex-shrink:0"></div>
+<div style="flex:1;background:#FFF5E5;overflow:hidden;display:flex;min-height:0"><div class="bgrid" id="bgrid"></div></div>
+<div id="sbar" style="display:flex;justify-content:space-around;background:white;border-top:2px solid #E8D9B5;padding:.45rem .75rem;flex-shrink:0"></div>
 </div>
 <div id="s-q" class="scr">
 <div class="tb">
@@ -175,7 +189,7 @@ input[name="ept"][value="600"]:checked+.popt{border-color:#9B2D2D;color:#9B2D2D;
 </div>
 <div style="height:4px;background:rgba(180,130,50,.15);flex-shrink:0"><div id="tbar" style="height:100%;width:100%;background:#5A8E3D;transition:width 1s linear,background .5s"></div></div>
 <div id="phasebanner" style="display:none;background:linear-gradient(135deg,#D4A843,#FFE082);padding:.55rem;text-align:center;color:#5A3A00;font-weight:900;font-size:.9rem;flex-shrink:0">🎁 مفاجأة! سؤال إضافي بـ ١٠٠ نقطة</div>
-<div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:.95rem;overflow-y:auto;background:linear-gradient(160deg,#FFF5E5,#FFE8D0)">
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:.95rem;overflow-y:auto;background:linear-gradient(160deg,#FFF5E5,#FFE8D0);min-height:0">
 <div style="background:white;border-radius:14px;padding:1.4rem 1.5rem;max-width:620px;width:100%;border:2.5px solid #D4B870;position:relative;text-align:center">
 <div id="qbadge" style="position:absolute;top:-.8rem;left:50%;transform:translateX(-50%);color:white;padding:.22rem 1rem;border-radius:18px;font-weight:700;font-size:.7rem;white-space:nowrap"></div>
 <p id="qtext" style="font-family:'Amiri',serif;font-size:clamp(1.05rem,2.2vw,1.55rem);color:#3A2A1A;line-height:1.85;margin:.4rem 0 0"></p>
@@ -200,7 +214,7 @@ input[name="ept"][value="600"]:checked+.popt{border-color:#9B2D2D;color:#9B2D2D;
 </div>
 </div>
 </div>
-<div id="s-end" class="scr" style="align-items:center;justify-content:center;padding:2rem;background:linear-gradient(160deg,#FFF5E5,#FFE8D0);text-align:center">
+<div id="s-end" class="scr" style="align-items:center;justify-content:center;padding:2rem;background:linear-gradient(160deg,#FFF5E5,#FFE8D0);text-align:center;overflow-y:auto">
 <div id="endbox" class="bi">
 <svg viewBox="0 0 72 72" width="72" style="margin-bottom:.5rem"><circle cx="36" cy="36" r="32" fill="rgba(212,168,67,.18)" stroke="#C9922A" stroke-width="2.5"/><text x="36" y="48" text-anchor="middle" font-size="32">🏆</text></svg>
 <h2 style="font-family:'Amiri',serif;font-size:1.65rem;color:#8B5A1A;margin:.28rem 0 .38rem">انتهت اللعبة!</h2>
