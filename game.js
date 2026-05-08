@@ -707,8 +707,8 @@ function finQ(){
   used.add(cq.cat+cq.idx);
   turn=1-turn;cq=null;phase='main';ms=null;
   document.getElementById('phasebanner').style.display='none';
-  buildBoard();
-  show('s-board');
+  const done=sel.every(c=>(gq[c]||[]).every((_,i)=>used.has(c+i)));
+  if(done){showEnd();}else{buildBoard();show('s-board');}
 }
 function backBoard(){clearInterval(tInt);cq=null;phase='main';document.getElementById('phasebanner').style.display='none';buildBoard();show('s-board');}
 function showEnd(){const w=teams[0].s!==teams[1].s?(teams[0].s>teams[1].s?teams[0]:teams[1]):null;document.getElementById('wname').innerHTML=w?`🏆 الفائز: ${w.n} — ${w.s} نقطة`:`🤝 تعادل!`;document.getElementById('fcards').innerHTML=teams.map(t=>`<div style="text-align:center;background:white;border:${w&&w.n===t.n?'2.5px solid #C9922A':'1.5px solid #E8D9B5'};border-radius:13px;padding:.9rem 1.4rem;min-width:110px"><div style="color:#8B5A1A;font-size:.75rem;margin-bottom:.25rem">${t.n}</div><div style="color:${w&&w.n===t.n?'#C05A20':'#8B5A1A'};font-size:2.2rem;font-weight:900;line-height:1">${t.s}</div><div style="color:#A0826D;font-size:.68rem;margin-top:.15rem">نقطة</div>${w&&w.n===t.n?'<div style="color:#C9922A;font-size:.88rem;margin-top:.35rem">🥇 الفائز</div>':''}</div>`).join('');show('s-end');}
