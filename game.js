@@ -1,3 +1,96 @@
+// ===== PROFILE SYSTEM =====
+const PROFILES_KEY = 'hasm_profiles';
+const ACTIVE_PROFILE_KEY = 'hasm_active_profile';
+const DEFAULT_PROFILE = 'ضيف';
+
+function getProfiles(){
+  let list = JSON.parse(localStorage.getItem(PROFILES_KEY) || '[]');
+  if(!list.includes(DEFAULT_PROFILE)) list.unshift(DEFAULT_PROFILE);
+  return list;
+}
+function saveProfiles(list){
+  localStorage.setItem(PROFILES_KEY, JSON.stringify(list));
+}
+function getActiveProfile(){
+  const p = localStorage.getItem(ACTIVE_PROFILE_KEY);
+  return (p && getProfiles().includes(p)) ? p : DEFAULT_PROFILE;
+}
+function setActiveProfile(name){
+  localStorage.setItem(ACTIVE_PROFILE_KEY, name);
+  updateProfileDisplay();
+}
+function addProfile(name){
+  name = (name||'').trim();
+  if(!name) return {ok:false, msg:'الاسم فارغ'};
+  if(name.length > 20) return {ok:false, msg:'الاسم طويل جداً'};
+  const list = getProfiles();
+  if(list.includes(name)) return {ok:false, msg:'الاسم موجود مسبقاً'};
+  list.push(name);
+  saveProfiles(list);
+  return {ok:true};
+}
+function deleteProfile(name){
+  if(name === DEFAULT_PROFILE) return false;
+  const list = getProfiles().filter(n => n !== name);
+  saveProfiles(list);
+  // Clear all used-data for this profile
+  Object.keys(localStorage).forEach(k => {
+    if(k.startsWith('hasm_used_' + name + '_')) localStorage.removeItem(k);
+  });
+  if(getActiveProfile() === name) setActiveProfile(DEFAULT_PROFILE);
+  return true;
+}
+function updateProfileDisplay(){
+  const el = document.getElementById('currentProfileName');
+  if(el) el.textContent = getActiveProfile();
+}
+function openProfileModal(){
+  renderProfileList();
+  document.getElementById('profileModal').style.display = 'flex';
+}
+function closeProfileModal(){
+  document.getElementById('profileModal').style.display = 'none';
+  document.getElementById('newProfileInput').value = '';
+}
+function renderProfileList(){
+  const list = getProfiles();
+  const active = getActiveProfile();
+  const container = document.getElementById('profileList');
+  container.innerHTML = list.map(name => {
+    const isActive = name === active;
+    const isDefault = name === DEFAULT_PROFILE;
+    return `<div class="profile-list-item ${isActive?'active':''}">
+      <span class="profile-name-text">${isActive?'✓ ':''}${name}</span>
+      <div>
+        ${!isActive?`<button class="btn-switch" onclick="handleSwitchProfile('${name.replace(/'/g,"\\'")}')">تبديل</button>`:''}
+        ${!isDefault?`<button class="btn-delete" onclick="handleDeleteProfile('${name.replace(/'/g,"\\'")}')">حذف</button>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+function handleSwitchProfile(name){
+  setActiveProfile(name);
+  renderProfileList();
+}
+function handleAddProfile(){
+  const input = document.getElementById('newProfileInput');
+  const result = addProfile(input.value);
+  if(result.ok){
+    input.value = '';
+    renderProfileList();
+  } else {
+    alert(result.msg);
+  }
+}
+function handleDeleteProfile(name){
+  if(confirm(`حذف الملف "${name}"؟ سيتم مسح كل سجل أسئلته.`)){
+    deleteProfile(name);
+    renderProfileList();
+  }
+}
+// Initialize on load
+window.addEventListener('DOMContentLoaded', updateProfileDisplay);
+// ===== END PROFILE SYSTEM =====
 const CATS={
 "القرآن الكريم":{ic:"cat-quran.png",bg:"#F4D9A0",q:[
 {p:200,q:"ما السورة المسماة بأم الكتاب؟",a:"سورة الفاتحة — ٧ آيات",r:"«هِيَ أُمُّ الْقُرْآنِ وَهِيَ السَّبْعُ الْمَثَانِي»",s:"البخاري ٤٧٠٤"},
