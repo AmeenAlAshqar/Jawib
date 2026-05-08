@@ -1,7 +1,7 @@
 {
-  "name": "جاوب — التحدي الإسلامي",
-  "short_name": "جاوب",
-  "description": "جاوب - لعبة التحدي الإسلامي",
+  "name": "حسم — التحدي الإسلامي",
+  "short_name": "حسم",
+  "description": "حسم - لعبة التحدي الإسلامي",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
