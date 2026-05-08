@@ -695,7 +695,30 @@ function editS(i){const v=prompt(`النقاط الحالية: ${teams[i].s}\nا
 function openQ(cat,idx){const q=gq[cat][idx];cq={cat,idx,...q};phase='main';ms=null;document.getElementById('phasebanner').style.display='none';document.getElementById('qbadge').textContent=cat;document.getElementById('qbadge').style.background=idx<2?'#5A8E3D':idx<4?'#C05A20':'#9B2D2D';document.getElementById('qtext').textContent=q.q;document.getElementById('qans').style.display='none';document.getElementById('rbtn').style.display='inline-block';document.getElementById('jrow').style.display='none';document.getElementById('ppill').textContent=q.p+' نقطة';document.getElementById('qturn').textContent='دور: '+teams[turn].n;timer=q.p===200?30:q.p===400?45:90;startT();show('s-q');}
 function startT(){clearInterval(tInt);updT();tInt=setInterval(()=>{timer--;updT();if(timer<=0)clearInterval(tInt);},1000);}
 function updT(){const max=phase==='bonus'?30:(cq.p===200?30:cq.p===400?45:90);const col=timer>max*.5?'#5A8E3D':timer>max*.25?'#C05A20':'#9B2D2D';document.getElementById('tpill').textContent='⏱ '+String(Math.floor(timer/60)).padStart(2,'0')+':'+String(timer%60).padStart(2,'0');document.getElementById('tbar').style.width=(timer/max*100)+'%';document.getElementById('tbar').style.background=col;}
-function revealAns(){clearInterval(tInt);const src=phase==='bonus'?cq.bo:cq;document.getElementById('atext').textContent=src.a;document.getElementById('rtext').textContent=src.r;document.getElementById('stext').textContent='المصدر: '+(src.s||cq.s||'');document.getElementById('qans').style.display='block';document.getElementById('rbtn').style.display='none';buildJB();}
+function revealAns(){
+  clearInterval(tInt);
+  const src=phase==='bonus'?cq.bo:cq;
+  document.getElementById('atext').textContent=src.a;
+  document.getElementById('rtext').textContent=src.r;
+  document.getElementById('stext').textContent='المصدر: '+(src.s||cq.s||'');
+  let dyEl=document.getElementById('dybanner');
+  if(!dyEl){
+    dyEl=document.createElement('div');
+    dyEl.id='dybanner';
+    dyEl.style.cssText='display:none;background:linear-gradient(135deg,#FFE8C9,#F4D9A0);border:1.5px solid #C9922A;border-radius:11px;padding:.65rem .8rem;margin-top:.7rem;text-align:right;box-shadow:0 2px 6px rgba(201,146,42,.18)';
+    const stextEl=document.getElementById('stext');
+    if(stextEl&&stextEl.parentNode){stextEl.parentNode.appendChild(dyEl);}
+  }
+  if(src.dy){
+    dyEl.innerHTML='<div style="font-weight:800;color:#8B5A1A;margin-bottom:.32rem;font-size:.82rem">💡 هل تعلم؟</div><div style="color:#4A2A0A;font-size:.78rem;line-height:1.6">'+src.dy+'</div>';
+    dyEl.style.display='block';
+  } else {
+    dyEl.style.display='none';
+  }
+  document.getElementById('qans').style.display='block';
+  document.getElementById('rbtn').style.display='none';
+  buildJB();
+}
 function buildJB(){document.getElementById('jrow').style.display='flex';document.getElementById('jprompt').textContent=phase==='main'?'من أجاب صح؟':`هل أجاب ${teams[ms].n} صح؟`;if(phase==='main'){document.getElementById('jbtns').innerHTML=teams.map((t,i)=>`<button onclick="jMain(${i})" style="flex:1;background:#5A8E3D;color:white;border:none;border-radius:8px;padding:.58rem;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;font-size:.78rem">${t.n}</button>`).join('')+`<button onclick="jMain(-1)" style="flex:1;background:white;color:#A0826D;border:1.5px solid #E8D9B5;border-radius:8px;padding:.58rem;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;font-size:.78rem">ولا أحد</button>`;}else{document.getElementById('jbtns').innerHTML=`<button onclick="jBonus(true)" style="flex:1;background:#5A8E3D;color:white;border:none;border-radius:8px;padding:.58rem;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;font-size:.78rem">نعم +١٠٠</button><button onclick="jBonus(false)" style="flex:1;background:#9B2D2D;color:white;border:none;border-radius:8px;padding:.58rem;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;font-size:.78rem">لا، الفريق الآخر</button>`;}}
 function jMain(idx){if(idx>=0)teams[idx].s+=cq.p;if(cq.bo&&idx>=0){phase='bonus';ms=idx;document.getElementById('phasebanner').style.display='block';document.getElementById('qbadge').textContent='سؤال إضافي';document.getElementById('qbadge').style.background='#D4A843';document.getElementById('qtext').textContent=cq.bo.q;document.getElementById('qans').style.display='none';document.getElementById('rbtn').style.display='inline-block';document.getElementById('jrow').style.display='none';document.getElementById('ppill').textContent='+١٠٠';timer=30;startT();return;}finQ();}
 function jBonus(ok){if(ok){teams[ms].s+=100;finQ();return;}const o=1-ms;document.getElementById('jprompt').textContent=`هل أجاب ${teams[o].n} صح؟`;document.getElementById('jbtns').innerHTML=`<button onclick="jBonusO(true)" style="flex:1;background:#5A8E3D;color:white;border:none;border-radius:8px;padding:.58rem;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;font-size:.78rem">نعم +١٠٠</button><button onclick="jBonusO(false)" style="flex:1;background:#9B2D2D;color:white;border:none;border-radius:8px;padding:.58rem;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;font-size:.78rem">لا، انتقل</button>`;}
