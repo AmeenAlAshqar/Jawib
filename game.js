@@ -1,3 +1,40 @@
+// ===== ADMIN PIN PROTECTION =====
+const ADMIN_PIN_KEY = 'hasm_admin_pin';
+
+function requireAdmin(){
+  let pin = localStorage.getItem(ADMIN_PIN_KEY);
+  if(!pin){
+    // First time → create PIN
+    let newPin = prompt('🔒 أنشئ رمز PIN لحماية الإدارة\n(٤ إلى ٨ أرقام)');
+    if(newPin === null) return;
+    newPin = String(newPin).trim();
+    if(!/^\d{4,8}$/.test(newPin)){
+      alert('⚠️ يجب أن يكون الرمز من ٤ إلى ٨ أرقام فقط');
+      return;
+    }
+    let confirmPin = prompt('🔒 أعد إدخال الرمز للتأكيد');
+    if(confirmPin === null) return;
+    if(String(confirmPin).trim() !== newPin){
+      alert('⚠️ الرمز غير مطابق، حاول مرة أخرى');
+      return;
+    }
+    localStorage.setItem(ADMIN_PIN_KEY, newPin);
+    alert('✓ تم حفظ رمز PIN بنجاح');
+    show('s-admin');
+    if(typeof renderAdmin === 'function') renderAdmin();
+  } else {
+    // Existing PIN → ask for it
+    let entered = prompt('🔒 أدخل رمز PIN');
+    if(entered === null) return;
+    if(String(entered).trim() !== pin){
+      alert('⚠️ رمز PIN غير صحيح');
+      return;
+    }
+    show('s-admin');
+    if(typeof renderAdmin === 'function') renderAdmin();
+  }
+}
+// ===== END ADMIN PIN PROTECTION =====
 // ===== PROFILE SYSTEM =====
 const PROFILES_KEY = 'hasm_profiles';
 const ACTIVE_PROFILE_KEY = 'hasm_active_profile';
