@@ -128,16 +128,40 @@ input[name="ept"][value="600"]:checked+.popt{border-color:var(--red);color:var(-
   .snum{font-size:1.15rem;min-width:42px}
   .sbtn{width:20px;height:20px;font-size:.72rem}
 }
+
+/* ===== PROFILE SYSTEM ===== */
+.profile-btn{display:flex;align-items:center;gap:6px;background:rgba(214,162,58,.15);border:1.5px solid var(--gold);border-radius:18px;padding:.32rem .85rem;font-family:'Cairo',sans-serif;font-size:.72rem;cursor:pointer;color:var(--primary);font-weight:700;transition:all .15s}
+.profile-btn:hover{background:rgba(214,162,58,.28)}
+.profile-btn span:first-child{font-size:.9rem}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.modal-box{background:var(--card);border-radius:16px;padding:24px;max-width:420px;width:100%;max-height:80vh;overflow-y:auto;border:3px solid var(--gold);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.modal-box h2{margin:0 0 16px;color:var(--primary);font-size:1.15rem;font-family:'Amiri',serif;text-align:center}
+.profile-list-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border:1px solid var(--soft-border);border-radius:10px;margin-bottom:8px;background:var(--white)}
+.profile-list-item.active{border-color:var(--gold);background:#FFF7E2;border-width:2px}
+.profile-name-text{font-weight:700;color:var(--primary);font-size:.92rem}
+.profile-list-item button{padding:6px 12px;border-radius:6px;border:none;cursor:pointer;font-size:.72rem;margin-right:6px;font-weight:700;font-family:'Cairo',sans-serif}
+.profile-list-item button:last-child{margin-right:0}
+.btn-switch{background:var(--primary);color:white}
+.btn-delete{background:var(--red);color:white}
+.new-profile-row{display:flex;gap:8px;margin-top:20px;padding-top:16px;border-top:1px solid var(--soft-border)}
+.new-profile-row input{flex:1;padding:10px;border:1.5px solid var(--soft-border);border-radius:8px;font-family:'Cairo',sans-serif;font-size:.84rem;direction:rtl;outline:none}
+.new-profile-row input:focus{border-color:var(--gold)}
+.modal-close-btn{padding:10px 24px;background:#888;color:white;border:none;border-radius:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700}
 </style>
 </head>
 <body>
 <div id="gr">
 <div id="s-home" class="scr on" style="background:linear-gradient(160deg,#F8F3E7,#F2EAD3);overflow-y:auto">
-<div style="display:flex;justify-content:flex-end;padding:.6rem 1rem 0;flex-shrink:0">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem 1rem 0;flex-shrink:0">
+<button class="profile-btn" onclick="openProfileModal()">
+<span>👤</span>
+<span id="currentProfileName">ضيف</span>
+<span style="font-size:.6rem">▾</span>
+</button>
 <button onclick="show('s-admin')" style="background:rgba(14,77,58,.1);border:1.5px solid var(--primary);color:var(--primary);border-radius:18px;padding:.32rem .85rem;font-family:'Cairo',sans-serif;font-size:.72rem;font-weight:700;cursor:pointer">⚙ إدارة الأسئلة</button>
 </div>
 <div style="text-align:center;padding:.4rem 1rem .8rem;flex-shrink:0">
-<img src="logo.png" alt="جاوب — التحدي الإسلامي" style="width:92%;max-width:520px;height:auto">
+<img src="logo.png" alt="حسم — التحدي الإسلامي" style="width:92%;max-width:520px;height:auto">
 </div>
 <div style="padding:0 .9rem .8rem">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.55rem">
@@ -218,7 +242,7 @@ input[name="ept"][value="600"]:checked+.popt{border-color:var(--red);color:var(-
 </div>
 <div id="s-board" class="scr">
 <div class="tb">
-<span class="tb-t" id="btitle">جاوب</span>
+<span class="tb-t" id="btitle">حسم</span>
 <span id="tbadge" class="pu"></span>
 <button class="gb" onclick="show('s-home')">خروج</button>
 </div>
@@ -271,6 +295,21 @@ input[name="ept"][value="600"]:checked+.popt{border-color:var(--red);color:var(-
 </div>
 </div>
 </div>
+
+<div class="modal-overlay" id="profileModal" style="display:none" onclick="if(event.target===this)closeProfileModal()">
+<div class="modal-box">
+<h2>👥 إدارة الملفات الشخصية</h2>
+<div id="profileList"></div>
+<div class="new-profile-row">
+<input type="text" id="newProfileInput" placeholder="اسم ملف جديد" maxlength="20">
+<button class="btn-switch" onclick="handleAddProfile()">إضافة</button>
+</div>
+<div style="margin-top:20px;text-align:center">
+<button class="modal-close-btn" onclick="closeProfileModal()">إغلاق</button>
+</div>
+</div>
+</div>
+
 <script src="game.js"></script>
 <script>
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('service-worker.js').catch(()=>{});});}
